@@ -10,32 +10,32 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 /**
- * JsonÓëjavaBeanÖ®¼äµÄ×ª»»¹¤¾ßÀà
- *	 @author liucong
- * 	 @date 2017Äê8ÔÂ4ÈÕ
+ * Jsonä¸javaBeanä¹‹é—´çš„è½¬æ¢å·¥å…·ç±»
+ *	 @author kuang
+ * 	 @date 2021å¹´1æœˆ18æ—¥
  */
 public class JsonUtils{
 	/**
-	 * ½«java¶ÔÏó×ª»»³Éjson×Ö·û´®
-	 *  @param  bean java¶ÔÏó¡£
-	 *  @return ·µ»Øjson¸ñÊ½¡£
+	 * å°†javaå¯¹è±¡è½¬æ¢æˆjsonå­—ç¬¦ä¸²
+	 *  @param  bean javaå¯¹è±¡ã€‚
+	 *  @return è¿”å›jsonæ ¼å¼ã€‚
 	 */
 	public static String beanToJson(Object bean) {
 		JSONObject json = JSONObject.fromObject(bean);
 		return json.toString();
 	}
 	/**
-	 * ½«java¶ÔÏó×ª»»Îªjson×Ö·û´®¸ñÊ½¡£
-	 * @param bean    Java¶ÔÏó
-	 * @param _nory_changes   Êı×é×ª»»Ö¸¶¨µÄÖµ¡£
-	 * @param nory    boolean±í´ïÊ½ trueºÍfalse true±íÊ¾×ª»»Êı×éÀïµÄÖµ¡£ false³öÀ´Êı×éÒÔÍâµÄ¡£
+	 * å°†javaå¯¹è±¡è½¬æ¢ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ã€‚
+	 * @param bean    Javaå¯¹è±¡
+	 * @param _nory_changes   æ•°ç»„è½¬æ¢æŒ‡å®šçš„å€¼ã€‚
+	 * @param nory    booleanè¡¨è¾¾å¼ trueå’Œfalse trueè¡¨ç¤ºè½¬æ¢æ•°ç»„é‡Œçš„å€¼ã€‚ falseå‡ºæ¥æ•°ç»„ä»¥å¤–çš„ã€‚
 	 * @return 
-	 * Field[] getDeclaredFields()·µ»Ø Field ¶ÔÏóµÄÒ»¸öÊı×é£¬ÕâĞ©¶ÔÏó·´Ó³´Ë Class ¶ÔÏóËù±íÊ¾µÄÀà»ò½Ó¿ÚËùÉùÃ÷µÄËùÓĞ×Ö¶Î¡£ 
-	 * String getName() ÒÔ String µÄĞÎÊ½·µ»Ø´Ë Class ¶ÔÏóËù±íÊ¾µÄÊµÌå£¨Àà¡¢½Ó¿Ú¡¢Êı×éÀà¡¢»ù±¾ÀàĞÍ»ò void£©Ãû³Æ¡£ 
+	 * Field[] getDeclaredFields()è¿”å› Field å¯¹è±¡çš„ä¸€ä¸ªæ•°ç»„ï¼Œè¿™äº›å¯¹è±¡åæ˜ æ­¤ Class å¯¹è±¡æ‰€è¡¨ç¤ºçš„ç±»æˆ–æ¥å£æ‰€å£°æ˜çš„æ‰€æœ‰å­—æ®µã€‚ 
+	 * String getName() ä»¥ String çš„å½¢å¼è¿”å›æ­¤ Class å¯¹è±¡æ‰€è¡¨ç¤ºçš„å®ä½“ï¼ˆç±»ã€æ¥å£ã€æ•°ç»„ç±»ã€åŸºæœ¬ç±»å‹æˆ– voidï¼‰åç§°ã€‚ 
 	 */
 	public static String beanToJson(Object bean, String[] _nory_changes, boolean nory) {
 		JSONObject json = null;
-		if (nory) {// ×ª»»_nory_changesÀïµÄÊôĞÔ
+		if (nory) {// è½¬æ¢_nory_changesé‡Œçš„å±æ€§
 			Field[] fields = bean.getClass().getDeclaredFields();
 			String str = "";
 			for (Field field : fields) {
@@ -52,7 +52,7 @@ public class JsonUtils{
 				str = str.replace(":" + s + ":", ":");
 			}
 			json = JSONObject.fromObject(bean, configJson(str.split(":")));
-		} else {// ×ª»»³ıÁË_nory_changesÀïµÄÊôĞÔ
+		} else {// è½¬æ¢é™¤äº†_nory_changesé‡Œçš„å±æ€§
 			json = JSONObject.fromObject(bean, configJson(_nory_changes));
 		}
 		return json.toString();
@@ -67,12 +67,12 @@ public class JsonUtils{
 
 
 	/**
-	 * ´ÓÒ»¸öJSON¶ÔÏó×Ö·û¸ñÊ½ÖĞ×ª»»µÃµ½Ò»¸öjava¶ÔÏó
+	 * ä»ä¸€ä¸ªJSONå¯¹è±¡å­—ç¬¦æ ¼å¼ä¸­è½¬æ¢å¾—åˆ°ä¸€ä¸ªjavaå¯¹è±¡
 	 * @param <T>
-	 * @param jsonString  StringÀàĞÍµÄjsond¶ÔÏó
-	 * @param beanCalss  ¾ßÌåµÄ¶ÔÏó¡£
-	 * @return ·µ»ØÒ»¸ö¾ßÌåµÄÊµÀı¶ÔÏó¡£
-	 * String str ="{\"address\":[\"³¤É³\",\"±±¾©\"],\"sex\":\"ÄĞ\",\"name\":\"ÕÅÈı\",\"age\":15}";
+	 * @param jsonString  Stringç±»å‹çš„jsondå¯¹è±¡
+	 * @param beanCalss  å…·ä½“çš„å¯¹è±¡ã€‚
+	 * @return è¿”å›ä¸€ä¸ªå…·ä½“çš„å®ä¾‹å¯¹è±¡ã€‚
+	 * String str ="{\"address\":[\"é•¿æ²™\",\"åŒ—äº¬\"],\"sex\":\"ç”·\",\"name\":\"å¼ ä¸‰\",\"age\":15}";
 	 *	System.out.println(JsonUtils.jsonToBean(str, Student.class));
 	 */
 	@SuppressWarnings("unchecked")
@@ -83,7 +83,7 @@ public class JsonUtils{
 	}
 
 	/**
-	 * ½«java¶ÔÏóList¼¯ºÏ×ª»»³Éjson×Ö·û´®
+	 * å°†javaå¯¹è±¡Listé›†åˆè½¬æ¢æˆjsonå­—ç¬¦ä¸²
 	 *  @param beans
 	 *  @return
 	 */
@@ -92,14 +92,14 @@ public class JsonUtils{
 		rest.append("[");
 		int size = beans.size();
 		for (int i = 0; i < size; i++) {
-			rest.append(beanToJson(beans.get(i)) + ((i < size - 1) ? "," : "")); //µ÷ÓÃÁË¶ÔÏó×ªjson¸ñÊ½µÄ·½·¨¡£beanToJosn(Object bena)
+			rest.append(beanToJson(beans.get(i)) + ((i < size - 1) ? "," : "")); //è°ƒç”¨äº†å¯¹è±¡è½¬jsonæ ¼å¼çš„æ–¹æ³•ã€‚beanToJosn(Object bena)
 		}
 		rest.append("]");
 		return rest.toString();
 	}
 
 	/**
-	 * ½«java¶ÔÏóList¼¯ºÏ×ª»»³Éjson×Ö·û´® ¶à¸ö
+	 * å°†javaå¯¹è±¡Listé›†åˆè½¬æ¢æˆjsonå­—ç¬¦ä¸² å¤šä¸ª
 	 * @param beans
 	 * @param _no_changes
 	 * @return
@@ -130,7 +130,7 @@ public class JsonUtils{
 
 
 	/**
-	 * ´Ójson HASH±í´ïÊ½ÖĞ»ñÈ¡Ò»¸ömap£¬¸ÄmapÖ§³ÖÇ¶Ì×¹¦ÄÜ
+	 * ä»json HASHè¡¨è¾¾å¼ä¸­è·å–ä¸€ä¸ªmapï¼Œæ”¹mapæ”¯æŒåµŒå¥—åŠŸèƒ½
 	 *
 	 * @param jsonString
 	 * @return
@@ -151,7 +151,7 @@ public class JsonUtils{
 	
 
 	/**
-	 * map¼¯ºÏ×ª»»³Éjson¸ñÊ½Êı¾İ
+	 * mapé›†åˆè½¬æ¢æˆjsonæ ¼å¼æ•°æ®
 	 * @param map
 	 * @return
 	 */
@@ -181,7 +181,7 @@ public class JsonUtils{
 
 
 	/**
-	 * ´ÓjsonÊı×éÖĞµÃµ½ÏàÓ¦javaÊı×é
+	 * ä»jsonæ•°ç»„ä¸­å¾—åˆ°ç›¸åº”javaæ•°ç»„
 	 * @param jsonString
 	 * @return
 	 */
@@ -199,7 +199,7 @@ public class JsonUtils{
 
 
 	/**
-	 * ´Ójson¶ÔÏó¼¯ºÏ±í´ïÊ½ÖĞµÃµ½Ò»¸öjava¶ÔÏóÁĞ±í
+	 * ä»jsonå¯¹è±¡é›†åˆè¡¨è¾¾å¼ä¸­å¾—åˆ°ä¸€ä¸ªjavaå¯¹è±¡åˆ—è¡¨
 	 *
 	 * @param jsonString
 	 * @param beanClass
@@ -224,7 +224,7 @@ public class JsonUtils{
 
 
 	/**
-	 * ´ÓjsonÊı×éÖĞ½âÎö³öjava×Ö·û´®Êı×é
+	 * ä»jsonæ•°ç»„ä¸­è§£æå‡ºjavaå­—ç¬¦ä¸²æ•°ç»„
 	 *
 	 * @param jsonString
 	 * @return
@@ -241,7 +241,7 @@ public class JsonUtils{
 
 
 	/**
-	   *   ´ÓjsonÊı×éÖĞ½âÎö³öjavaLongĞÍ¶ÔÏóÊı×é
+	   *   ä»jsonæ•°ç»„ä¸­è§£æå‡ºjavaLongå‹å¯¹è±¡æ•°ç»„
 	 *@param jsonString
 	 * @return
 	 */
@@ -256,7 +256,7 @@ public class JsonUtils{
 	}
 
 	/**
-	   * ´ÓjsonÊı×éÖĞ½âÎö³öjava IntegerĞÍ¶ÔÏóÊı×é
+	   * ä»jsonæ•°ç»„ä¸­è§£æå‡ºjava Integerå‹å¯¹è±¡æ•°ç»„
 	 *@param jsonString
 	 * @return
 	 */
@@ -272,7 +272,7 @@ public class JsonUtils{
 
 
 	/**
-	   *  ´ÓjsonÊı×éÖĞ½âÎö³öjava DoubleĞÍ¶ÔÏóÊı×é
+	   *  ä»jsonæ•°ç»„ä¸­è§£æå‡ºjava Doubleå‹å¯¹è±¡æ•°ç»„
 	 * @param jsonString
 	 * @return
 	 */
